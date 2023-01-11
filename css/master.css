@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap');
+body{
+  font-family: 'Nunito', sans-serif;
+  color: #eee;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+li{
+  list-style: none;
+}
+h1{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: #333;
+  font-size: 48px;
+  padding: 80px;
+  text-align: center;
+  font-weight: 400;
+  background-color: #fff;
+  z-index: 10;
+  transition: box-shadow .4s, border-radius 1s;
+}
+.notelist{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  padding: 240px 20px 80px;
+}
+.note{
+  transition: .3s;
+  position: relative;
+  background-color: #333;
+  border-radius: 10px;
+  padding: 15px;
+  /* max-width: 50vw; */
+  overflow-y: hidden;
+}
+/* @media screen and (max-width: 900px){
+  .note{
+    max-width: none;
+  }
+}
+@media screen and (min-width: 1200px){
+  .note{
+    max-width: 33vw;
+  }
+}
+@media screen and (min-width: 2000px){
+  .note{
+    max-width: 25vw;
+  }
+} */
+.note ul{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.note li{
+  position: relative;
+  font-size: 18px;
+}
+.note.edited li:focus-within:after{
+  content: '';
+  position: absolute;
+  inset: 0 -15px;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  /* background-color: #ffffff20; */
+  pointer-events: none;
+}
+h2{
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 400;
+  outline: none;
+  position: relative;
+}
+h2:focus:after{
+  content: '';
+  position: absolute;
+  inset: 0 -15px;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  /* background-color: #ffffff20; */
+  pointer-events: none;
+}
+.note.checklist li{
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+}
+.note.checklist .text{
+  width: 100%;
+}
+.note.checklist li svg{
+  position: absolute;
+  top: -5.2px;
+  height: 28px;
+  pointer-events: none;
+}
+.note.checklist li svg rect{
+  transition: .2s;
+  fill: transparent;
+  stroke: #eee;
+  stroke-width: 4px;
+}
+.note.checklist li input:hover ~ svg rect,.note.checklist li input:focus-visible ~ svg rect{
+  stroke: #fff;
+  /* fill: #555; */
+}
+.note.checklist li svg path:nth-of-type(1){
+  transition: .2s;
+  stroke-dasharray: 79px;
+  stroke-dashoffset: 79px;
+}
+.note.checklist li svg path:nth-of-type(2){
+  transition: .2s;
+  stroke-dasharray: 22px;
+  stroke-dashoffset: 22px;
+}
+.note.checklist li input{
+  margin: auto 0;
+  height: 100%;
+  width: 30px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+.note.checklist li input:checked ~ svg rect{
+  fill: #eee;
+}
+.note.checklist li input:checked ~ svg path:nth-of-type(1){
+  stroke-dashoffset: 0;
+}
+.note.checklist li input:checked ~ svg path:nth-of-type(2){
+  animation: .2s linear .15s checkbox_eclat;
+}
+.note.checklist li input:checked ~ label{
+  text-decoration: line-through;
+  opacity: .8;
+}
+.note.checklist li input:checked ~ div.text{
+}
+@keyframes checkbox_eclat {
+  50%{
+    stroke-dashoffset: 0;
+  }
+  to{
+    stroke-dashoffset: -22;
+  }
+}
+.note.list li{
+  padding-left: 30px;
+  position: relative;
+}
+.note.list li::before{
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  background-color: #eee;
+  width: 12px;
+  height: 4px;
+  border-radius: 2px;
+}
+.edited{
+  padding-bottom: 45px;
+  z-index: 6;
+}
+.edited label{
+  cursor: text;
+}
+.note .note_setting{
+  transition: .3s;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 -2px 4px #00000050;
+  width: 100%;
+  height: 35px;
+  transform: translateY(100%);
+  display: flex;
+}
+.change_color{
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  background-color: #fff;
+}
+.note .note_setting button{
+  height: 35px;
+}
+.note .note_setting img{
+  height: 20px;
+}
+ul .text{
+  resize: none;
+  background-color: transparent;
+  font-size: 18px;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  display: block;
+  outline: none;
+}
+nav{
+  background-color: #fff;
+  box-shadow: 0 -2px 4px #00000050;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 15%;
+  height: 60px;
+  z-index: 10;
+}
+nav ul{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 20px;
+}
+nav li{
+  transition: .3s;
+}
+button{
+  height: 42px;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+button.change_color_button span{
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+}
+button img{
+  height: 30px;
+}
+.back_zone{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+  /* background-color: #ff888820; */
+}
